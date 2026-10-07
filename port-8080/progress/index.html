@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Progress · Gary's server</title>
+<style>
+body{font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2328;background:#fff;max-width:820px;margin:40px auto;padding:0 20px}
+h1{font-size:28px;border-bottom:1px solid #d0d7de;padding-bottom:8px}
+.item{border:1px solid #d0d7de;border-radius:6px;padding:14px 18px;margin:14px 0}
+.item h2{font-size:18px;margin:0 0 6px;display:flex;gap:10px;align-items:center}
+.badge{font-size:12px;font-weight:600;border-radius:2em;padding:2px 10px;border:1px solid}
+.live{color:#1a7f37;border-color:#1a7f37;background:#dafbe1}.building{color:#9a6700;border-color:#d4a72c;background:#fff8c5}.planned{color:#57606a;border-color:#d0d7de;background:#f6f8fa}
+ul{margin:6px 0 0 0;padding-left:20px}code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-size:90%}
+a{color:#0969da}.muted{color:#57606a;font-size:14px}
+</style></head><body>
+<h1>What's underway</h1>
+<p class="muted">Status badges for the web pages are checked live each time you open this page. Last edited Oct 6, 2026, 10:33 AM PT.</p>
+
+<div class="item"><h2>1. TrapRadar <span class="badge live">on this Mac</span></h2>
+<a href="/trapradar/index.html">TrapRadar page</a> · <a href="/trapradar/iOS/TrapRadar-iPhone.app/">iPhone build</a>
+<ul><li>Plain README-style page: short description, big download button for the zip, one or two commands to get it running</li>
+<li>Speed cameras, speed limits and community trap alerts (not a radar detector), plus estimated lane-change alerts</li>
+<li>Finder tab is still in the app. Lane-change alerts and on-device Plus are in the build.</li><li>Subscription / one-time unlock paywall and referral credits</li>
+<li>Two-Mac build workflow in the README</li></ul></div>
+
+<div class="item"><h2>2. Strategy section <span class="badge live">on this Mac</span></h2>
+<a href="/port-8080/strategy/">Success principles</a> · <a href="/port-8080/strategy/library/">Library</a>
+<ul><li>Lessons from public interviews, letters and talks of the world's richest people, posted one by one as they land</li>
+<li>Library: public-domain classics (e.g. The Science of Getting Rich, Acres of Diamonds) and short key-idea summaries of modern books with links to free sources</li></ul></div>
+
+<div class="item"><h2>3. Success-principles script <span class="badge live">on this Mac</span></h2>
+<p><a href="/port-8080/strategy/success-principles.md">success-principles.md</a> includes principles 1–9 and the source list.</p></div>
+
+<div class="item"><h2>4. Learning-agent chatbot <span class="badge planned">planned</span></h2>
+<p>A standalone AI that learns from the gathered material and builds apps as plugins for a Grok agent. <a href="/port-8080/learning-agent/">The page is here.</a> It does not chat yet.</p></div>
+
+<script>
+document.querySelectorAll('[data-check]').forEach(b=>{fetch(b.dataset.check,{method:'HEAD',cache:'no-store'}).then(r=>{if(r.ok){b.textContent='live';b.className='badge live'}}).catch(()=>{})});
+</script>
+</body></html>

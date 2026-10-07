@@ -1,0 +1,10 @@
+{
+  "name": "SHAMEGRIN",
+  "short_name": "SHAMEGRIN",
+  "description": "Dark emo rap for anxiety. No face. Just sound.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e0e0e",
+  "theme_color": "#0e0e0e",
+  "lang": "en-CA"
+}

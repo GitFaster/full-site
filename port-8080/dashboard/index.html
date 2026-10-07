@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard · this Mac</title>
+<style>
+body{font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2328;background:#fff;max-width:960px;margin:24px auto;padding:0 18px}
+h1{font-size:22px;margin:0}
+header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #d0d7de;padding-bottom:8px}
+.muted{color:#57606a;font-size:13px}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+td{padding:7px 8px;border-bottom:1px solid #eaeef2;vertical-align:top}
+td:first-child{font-weight:600;width:34%}
+.badge{font-size:12px;font-weight:600;border-radius:2em;padding:1px 9px;border:1px solid;white-space:nowrap}
+.live{color:#1a7f37;border-color:#1a7f37;background:#dafbe1}
+.planned{color:#57606a;border-color:#d0d7de;background:#f6f8fa}
+a{color:#0969da}
+pre{background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:10px;font-size:12px;height:300px;overflow:auto;white-space:pre-wrap;margin:6px 0}
+</style>
+</head>
+<body>
+<p class="muted"><a href="/">Everything</a> · <a href="/guide/">Guide</a></p>
+<header><h1>Dashboard</h1><span class="muted">Local copy on this Mac</span></header>
+<table>
+<tr><td>ShameGrin site</td><td><span class="badge live">on this Mac</span> <a href="/shamegrin.com/">home</a></td></tr>
+<tr><td>TrapRadar page</td><td><span class="badge live">on this Mac</span> <a href="/trapradar/index.html">page</a> · <a href="/trapradar/trapradar-files.zip">zip</a></td></tr>
+<tr><td>iPhone build</td><td><span class="badge live">built</span> <a href="/trapradar/iOS/TrapRadar-iPhone.app/">TrapRadar-iPhone.app</a></td></tr>
+<tr><td>Strategy section</td><td><span class="badge live">on this Mac</span> <a href="/port-8080/strategy/">principles</a></td></tr>
+<tr><td>Book library</td><td><span class="badge live">on this Mac</span> <a href="/port-8080/strategy/library/">library</a></td></tr>
+<tr><td>Success-principles script</td><td><span class="badge live">on this Mac</span> <a href="/port-8080/strategy/success-principles.md">markdown</a></td></tr>
+<tr><td>Learning-agent chatbot</td><td><span class="badge planned">planned</span> <a href="/port-8080/learning-agent/">page</a></td></tr>
+<tr><td>Progress page</td><td><span class="badge live">on this Mac</span> <a href="/port-8080/progress/">progress</a></td></tr>
+</table>
+<h2>Fetch log</h2>
+<pre id="log">loading…</pre>
+<script>
+fetch("/port-8080/strategy/log.txt").then(r=>r.text()).then(t=>{
+  const lines=t.trim().split("\n");
+  document.getElementById("log").textContent=lines.slice(-40).join("\n");
+}).catch(()=>{ document.getElementById("log").textContent="Log file missing."; });
+</script>
+</body>
+</html>

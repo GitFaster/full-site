@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guide · this Mac</title>
+<style>
+body{font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#1f2328;background:#fff;max-width:760px;margin:28px auto;padding:0 18px 80px}
+h1{font-size:32px;margin:0 0 8px}
+a{color:#0969da}
+.step{border:1px solid #d0d7de;border-radius:12px;padding:14px 16px;margin:12px 0}
+.step h2{margin:0 0 6px;font-size:18px}
+.muted{color:#57606a}
+ol{margin:8px 0 0;padding-left:20px}
+input{width:100%;box-sizing:border-box;font:16px inherit;padding:10px 12px;border:1px solid #d0d7de;border-radius:8px}
+#hits{margin-top:10px}
+#hits p{margin:8px 0;padding:8px 10px;background:#f6f8fa;border-radius:8px}
+</style>
+</head>
+<body>
+<p><a href="/">Everything</a> · <a href="/port-8080/dashboard/">Dashboard</a></p>
+<h1>Guide</h1>
+<p class="muted">Walk the whole site on this Mac. The live shamegrin.com shop and the server’s /trapradar/ page are not part of this copy.</p>
+
+<div class="step">
+<h2>1. Music</h2>
+<p>Open the artist site, then a song page.</p>
+<ol>
+<li><a href="/shamegrin.com/">ShameGrin home</a></li>
+<li><a href="/shamegrin.com/artist/">Artist</a></li>
+<li><a href="/shamegrin.com/catalog/">Catalog</a></li>
+<li><a href="/shamegrin.com/music/the-stutter-boys-and-the-shamegrin/">The Stutter Boys and the ShameGrin</a></li>
+<li><a href="/shamegrin.com/music/tired-of-this-world/">Tired of This World</a></li>
+<li><a href="/shamegrin.com/music/anime-star/">Anime Star</a></li>
+<li><a href="/shamegrin.com/music/the-wolf-that-stays-caged/">The Wolf That Stays Caged</a></li>
+<li><a href="/shamegrin.com/music/oblivion-home-no-more/">Oblivion Home No More</a></li>
+<li><a href="/shamegrin.com/music/the-mountains-still-call-to-me/">The Mountains Still Call to Me</a></li>
+<li><a href="/shamegrin.com/music/fall-into-the-ground/">Fall Into the Ground</a></li>
+<li><a href="/shamegrin.com/press/">Press</a></li>
+</ol>
+</div>
+
+<div class="step">
+<h2>2. Strategy</h2>
+<p>Nine principles, then the two public-domain books.</p>
+<ol>
+<li><a href="/port-8080/strategy/">Success principles</a></li>
+<li><a href="/port-8080/strategy/library/">Library</a> — Wattles and Conwell, full text</li>
+<li><a href="/port-8080/strategy/log.txt">Fetch log</a></li>
+</ol>
+</div>
+
+<div class="step">
+<h2>3. TrapRadar on the iPhone</h2>
+<p>The app on the phone has these. It does not have a paid App Store subscription, a shared trap feed, or a chatbot.</p>
+<ol>
+<li>Speedometer in km/h, with a sweep</li>
+<li>OpenStreetMap speed limit, and an over-limit warning</li>
+<li>Trap pins saved on the phone, with sound, haptic, and a notification</li>
+<li>A labelled guess when a nearby Bluetooth name matches police-gear words</li>
+<li>Search, alternate routes, and a banner when a pin is ahead</li>
+<li>Lane-change estimate from GPS heading</li>
+<li>Plus and referral, on this iPhone only</li>
+<li>The Finder tab is still there</li>
+</ol>
+<p><a href="/trapradar/index.html">TrapRadar files</a> · <a href="/trapradar/iOS/TrapRadar-iPhone.app/">iPhone build</a></p>
+</div>
+
+<div class="step">
+<h2>4. Look something up</h2>
+<p class="muted">This searches the principles file on this Mac. It is not a chatbot.</p>
+<input id="q" placeholder="Try: customer, lane, referral, long term" autocomplete="off">
+<div id="hits"></div>
+</div>
+
+<script>
+let lines = [];
+fetch("/port-8080/strategy/success-principles.md").then(r => r.text()).then(t => { lines = t.split("\n"); });
+const q = document.getElementById("q");
+const hits = document.getElementById("hits");
+q.addEventListener("input", () => {
+  const needle = q.value.trim().toLowerCase();
+  hits.innerHTML = "";
+  if (needle.length < 2) return;
+  const found = lines.filter(l => l.toLowerCase().includes(needle)).slice(0, 8);
+  if (!found.length) { hits.innerHTML = "<p>No match in the principles file.</p>"; return; }
+  found.forEach(l => {
+    const p = document.createElement("p");
+    p.textContent = l.replace(/^#+\s*/, "").replace(/\*\*/g, "");
+    hits.appendChild(p);
+  });
+});
+</script>
+</body>
+</html>
