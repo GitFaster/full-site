@@ -29,7 +29,9 @@
   onScroll();
 
   if (toggle && menu) {
+    menu.inert = !menu.classList.contains("is-open");
     const setOpen = (open) => {
+      menu.inert = !open;
       menu.classList.toggle("is-open", open);
       menu.setAttribute("aria-hidden", open ? "false" : "true");
       document.body.classList.toggle("menu-open", open);
@@ -50,6 +52,33 @@
       if (e.key === "Escape" && menu.classList.contains("is-open")) setOpen(false);
     });
   }
+
+
+  // Search the existing, verified music links without an external API or fake results.
+  const setupMusicSearch = (inputId, gridId, countId) => {
+    const input = document.getElementById(inputId);
+    const grid = document.getElementById(gridId);
+    const count = document.getElementById(countId);
+    if (!input || !grid) return;
+    const cards = Array.from(grid.querySelectorAll(".catalog-card"));
+    const render = () => {
+      const term = input.value.trim().toLocaleLowerCase();
+      let shown = 0;
+      cards.forEach((card) => {
+        const title = (card.querySelector(".card-title")?.textContent || card.textContent || "").toLocaleLowerCase();
+        const matched = !term || title.includes(term);
+        card.hidden = !matched;
+        if (matched) shown++;
+      });
+      if (count) count.textContent = term
+        ? shown + " of " + cards.length + " tracks"
+        : cards.length + " tracks";
+    };
+    input.addEventListener("input", render);
+    render();
+  };
+  setupMusicSearch("releaseSearch", "catalogResults", "releaseSearchCount");
+  setupMusicSearch("soundcloudSearch", "soundcloudResults", "soundcloudSearchCount");
 
   const reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && !reduceMotion) {

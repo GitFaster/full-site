@@ -850,3 +850,49 @@ body.menu-open .player-bar { visibility: hidden; pointer-events: none; }
   .brand-sub { display: none; }
   .announce { font-size: 12px; padding: 8px 12px; }
 }
+
+/* SHAMEGRIN mobile/search hardening — 2026-11 */
+html { scroll-padding-top: calc(var(--nav-h) + var(--announce-h) + 20px); }
+main, .section, .hero, .catalog-grid { min-width: 0; }
+img { max-width: 100%; }
+.catalog-card[hidden] { display: none !important; }
+.music-search-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 22px;
+}
+.music-search {
+  flex: 1 1 280px;
+  max-width: 520px;
+  min-width: 0;
+  min-height: 48px;
+  border: 1px solid rgba(255,255,255,.17);
+  border-radius: 12px;
+  background: rgba(255,255,255,.055);
+  color: #f7f7fa;
+  padding: 13px 16px;
+  font: 500 16px/1.4 Inter, sans-serif;
+  appearance: none;
+}
+.music-search::placeholder { color: #a6a6b4; }
+.music-search-count {
+  font: 500 12px/1.5 "DM Mono", monospace;
+  color: #b7b7c5;
+  margin: 0;
+}
+.music-search:focus-visible,
+.video-search:focus-visible,
+.nav-toggle:focus-visible,
+.mobile-menu a:focus-visible,
+.catalog-card:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .music-search-wrap { display: block; }
+  .music-search { width: 100%; max-width: none; }
+  .music-search-count { padding-top: 8px; }
+  .player-bar { bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
+}
